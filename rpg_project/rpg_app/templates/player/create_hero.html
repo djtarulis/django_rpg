@@ -1,0 +1,10 @@
+{% extends 'player/base.html' %}
+
+{% block content %}
+<h2>Create Your Hero</h2>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Create Hero</button>
+</form>
+{% endblock %}

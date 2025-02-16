@@ -1,0 +1,45 @@
+# Web-Based RPG Game Project Summary
+
+## **1. Overview**
+This project is a web-based RPG game developed using Django. The game includes character classes, religions, player inventory, quests, and a combat system.
+
+---
+
+## **2. Key Features**
+### **Gameplay Mechanics**
+- Player character creation with classes and religions.
+- Experience-based leveling system with abilities and stats.
+- Quest system for missions and progression.
+- Combat system with enemies and rewards.
+- Inventory and item management.
+
+### **World and Story Elements**
+- World with zones (cities, forests, dungeons).
+- Non-player characters (NPCs) that provide quests and interact with players.
+- A dynamic storyline influenced by player actions.
+
+---
+
+## **3. Technical Aspects**
+### **Models**
+- Player, PlayerClass, Religion, Item, Quest, Enemy, PlayerInventory.
+- Relationships between players and their inventories, quests, and stats.
+
+### **Views and Templates**
+- Login, logout, and register views.
+- Character creation and inventory views.
+- Templates with a base layout for dynamic page rendering.
+
+### **URLs**
+- `/` (Home page)
+- `/register/` (Register a new user)
+- `/login/` (Log in to the game)
+- `/logout/` (Log out of the game)
+- `/player_inventory/` (View player inventory)
+
+### **Frontend**
+- Templates using Django's template engine.
+- Static files (`styles.css`) for styling.
+- Dynamic page elements with forms and conditionally rendered content.
+
+---

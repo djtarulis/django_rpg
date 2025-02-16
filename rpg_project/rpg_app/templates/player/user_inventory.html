@@ -1,0 +1,12 @@
+{% extends 'player/base.html' %}
+
+{% block content %}
+<h2>{{ user.username }}'s Inventory</h2>
+<ul>
+    {% for item in inventory %}
+        <li>{{ item.item.name }}: {{ item.quantity }}</li>
+    {% empty %}
+        <li>No items in inventory.</li>
+    {% endfor %}
+</ul>
+{% endblock %}

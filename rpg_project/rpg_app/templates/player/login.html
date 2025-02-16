@@ -1,0 +1,15 @@
+{% extends "player/base.html" %}
+
+{% block title %}
+    Login | RPG Game
+{% endblock %}
+
+{% block content %}
+    <h1>Login</h1>
+    <form method="post" action="{% url 'login' %}">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Log In</button>
+    </form>
+    <p>Don't have an account? <a href="{% url 'register' %}">Register here</a>.</p>
+{% endblock %}
