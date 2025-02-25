@@ -15,6 +15,7 @@ urlpatterns = [
 
     # Player paths
     path("create_hero/", views.create_hero, name="create_hero"),
+    path("profile/", views.user_profile, name="user_profile"),
     path("user_inventory/", views.view_inventory, name="user_inventory"),
-
+    path("equip/<int:item_id>", views.equip_item, name='equip_item')
 ]

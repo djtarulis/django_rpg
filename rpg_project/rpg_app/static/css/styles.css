@@ -18,3 +18,63 @@ header nav a, header nav button {
 main {
     padding: 20px;
 }
+
+.profile-container {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+}
+
+.profile-stats, .profile-inventory {
+    width: 45%;
+    background-color: #f4f4f4;
+    padding: 15px;
+    border-radius: 8px;
+}
+
+h1, h2 {
+    text-align: center;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+li {
+    padding: 5px 0;
+}
+
+.avatar-img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    border: 3px solid #444;
+}
+
+.progress-bar {
+    width: 60%;
+    background-color: #ddd; /* Background for empty space */
+    border-radius: 5px;
+    overflow: hidden;
+    margin-bottom: 10px;
+    border: 1px solid #bbb; /* Optional: border for visibility */
+}
+
+/* The actual progress inside the bar */
+.progress {
+    height: 5px;
+    text-align: center;
+    color: white;
+    line-height: 20px; /* Centers text vertically */
+}
+
+/* Specific styles for health bar */
+.progress.health {
+    background-color: #e74c3c; /* Red */
+}
+
+/* Specific styles for XP bar */
+.progress.xp {
+    background-color: #3498db; /* Blue */
+}

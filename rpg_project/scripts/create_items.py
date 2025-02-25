@@ -1,3 +1,12 @@
+import os
+import django
+
+# Set up Django settings (update if your project name is different)
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'rpg_project.settings')
+django.setup()
+
+# TODO: Fix script running in django shell
+
 from rpg_app.models import Item
 
 # Define new classes

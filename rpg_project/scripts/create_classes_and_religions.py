@@ -1,3 +1,10 @@
+import os
+import django
+
+# Set up Django settings (update if your project name is different)
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'rpg_project.settings')
+django.setup()
+
 from rpg_app.models import PlayerClass, Religion
 
 # Define new classes

@@ -1,0 +1,63 @@
+{% extends 'player/base.html' %}
+
+{% block content %}
+<h1>{{ player.name }}'s Profile</h1>
+
+<div class="profile-container">
+    <div class="profile-avatar">
+        <img src="{{ player.avatar.url }}" alt="{{ player.name }}'s Avatar" class="avatar-img">
+    </div>
+    <div class="profile-stats">
+        <h2>Character Stats</h2>
+        <p><strong>Level:</strong> {{ player.level }}</p>
+        <p><strong>Health:</strong> {{ player.health }}</p>
+        <div class="progress-bar">
+            <div class="progress health" style="width: {{ player.health }}%"></div>
+        </div>
+        <p><strong>XP:</strong> {{ player.experience }} / {{ player.experience_to_next_level }}</p>
+        <div class="progress-bar">
+            <div class="progress xp" style="width: {% widthratio player.experience_points player.experience_to_next_level 100 %}%">        </div>
+        </div>
+        <p><strong>Gold:</strong> {{ player.currency }}</p>
+    </div>   
+
+    <div class="profile-inventory">
+        <h2>Inventory</h2>
+        <ul>
+            {% for item in inventory %}
+                <li>{{ item.item.name }} : {{ item.quantity }}
+                {% if item.is_equipped %}
+                    <a href="{% url 'equip_item' item.id %}">Unequip</a>
+                {% else %}
+                    <a href="{% url 'equip_item' item.id %}">Equip</a>
+                {% endif %}
+                </li>
+            {% empty %}
+                <li>No items in inventory.</li>
+            {% endfor %}
+        </ul>
+    </div>
+    
+    <h2>Recent Quests</h2>
+    <ul>
+        {% for quest in recent_quests %}
+            <li>{{ quest.title }} - {% if quest.is_completed %} Completed {% else %} In Progress {% endif %}</li>
+        {% empty %}
+            <li>No quests yet.</li>
+        {% endfor %}
+    </ul>
+    
+    <h2>Recent Battles</h2>
+    <ul>
+        {% for battle in recent_battles %}
+            <li>{{ battle.description }} - {{ battle.result }} ({{ battle.date|date:"M d, Y" }})</li>
+        {% empty %}
+            <li>No battles recorded.</li>
+        {% endfor %}
+    </ul>    
+</div>
+
+
+
+<a href="{% url 'home' %}">← Back to Home</a>
+{% endblock %}

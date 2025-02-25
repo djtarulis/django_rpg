@@ -17,7 +17,8 @@
                     {% csrf_token %}
                     <button type="submit">Logout</button>
                 </form>
-                <a href="{% url 'user_inventory' %}">My Inventory</a>
+                <a href="{% url 'user_profile' %}">Profile</a>
+                <a href="{% url 'user_inventory' %}">Inventory</a>
             {% else %}
                 <a href="{% url 'login' %}">Login</a>
                 <a href="{% url 'register' %}">Register</a>

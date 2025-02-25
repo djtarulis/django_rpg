@@ -47,6 +47,7 @@ class Player(models.Model):
     # Identifiers
     user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='player_profile')
     name = models.CharField(max_length=25, unique=True)
+    avatar = models.ImageField(upload_to='avatars/', default='avatars/default.png')
 
     # Starting class and religion
     player_class = models.ForeignKey(PlayerClass, on_delete=models.SET_NULL, null=True)
@@ -97,14 +98,24 @@ class Quest(models.Model):
     """
     Quest template
     """
+    # TODO: Fix player default error
+    player = models.ForeignKey(Player, on_delete=models.CASCADE, null=True, blank=True)
     name = models.CharField(max_length=30, unique=True)
     description = models.TextField()
     difficulty = models.CharField(max_length=50, choices=[('easy', 'Easy'), ('medium', 'Medium'), ('hard', 'Hard')])
     gold_reward = models.IntegerField(default=10)
     exp_reward = models.IntegerField(default=10)
+    is_completed = models.BooleanField(default=False)
+    completion_date = models.DateTimeField(null=True, blank=True)
 
     def __str__(self):
         return f"{self.name}"
+    
+class BattleLog(models.Model):
+    player = models.ForeignKey(Player, on_delete=models.CASCADE)
+    description = models.TextField()
+    result = models.CharField(max_length=50)  # Win/Loss/Draw
+    date = models.DateTimeField(auto_now_add=True)
 
 class Enemy(models.Model):
     """
@@ -152,6 +163,7 @@ class PlayerInventory(models.Model):
     user = models.ForeignKey(Player, on_delete=models.CASCADE, related_name="player_inventory")
     item = models.ForeignKey(Item, on_delete=models.CASCADE, related_name="inventory_item")
     quantity = models.PositiveIntegerField(default=0) # Number of item user owns.
+    is_equipped = models.BooleanField(default=False)
 
     def __str__(self):
         """

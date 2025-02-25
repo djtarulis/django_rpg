@@ -4,7 +4,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login
 from .forms import HeroCreationForm
 from django.contrib.auth.forms import UserCreationForm
-from .models import Player, PlayerInventory
+from .models import BattleLog, Player, PlayerInventory, Item, Quest
 from django.contrib.auth.views import LoginView, LogoutView
 from django.shortcuts import get_object_or_404
 
@@ -75,3 +75,29 @@ class CustomLoginView(LoginView):
 
 class CustomLogoutView(LogoutView):
     template_name = 'player/logout.html'
+
+@login_required
+def user_profile(request):
+    player = Player.objects.get(user=request.user)
+    inventory = PlayerInventory.objects.filter(user=player)
+    recent_quests = Quest.objects.filter(player=player).order_by('-completion_date')[:5]
+    recent_battles = BattleLog.objects.filter(player=player).order_by('-date')[:5]
+
+    context = {
+        'player': player,
+        'inventory': inventory,
+        'recent_quests': recent_quests,
+        'recent_battles': recent_battles
+    }
+    return render(request, 'player/profile.html', context)
+
+@login_required
+def equip_item(request, item_id):
+    player = Player.objects.get(user=request.user)
+    item = PlayerInventory.objects.get(id=item_id)
+
+    if item.user == player:
+        item.is_equipped = not item.is_equipped # Toggle equip/unequip
+        item.save()
+
+    return redirect('user_profile')
