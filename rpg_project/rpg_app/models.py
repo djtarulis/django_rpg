@@ -143,6 +143,11 @@ class Item(models.Model):
     name = models.CharField(max_length=100)
     description = models.TextField(default='')
     price = models.IntegerField(default=0)
+    item_level = models.IntegerField(default=1)
+    item_rarity = models.CharField(max_length=20, choices=[('common', 'Common'), ('uncommon', 'Uncommon'), ('rare', 'Rare'), ('legendary', 'Legendary')], default='common')
+    item_usable = models.BooleanField(default=False)
+    item_usable_while_equipped = models.BooleanField(default=False)
+    item_usable_while_in_inventory = models.BooleanField(default=False)
     type = models.CharField(max_length=20, choices=ITEM_TYPES, default='misc')
 
     # Stat bonuses (optional)
